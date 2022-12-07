@@ -2,15 +2,17 @@
   <div id="swiperbar">
     <van-swipe :autoplay="3000" lazy-render>
       <van-swipe-item v-for="image in state.images" :key="image">
-        <img :src="image.imageUrl" />
+        <img :src="image.pic" />
       </van-swipe-item>
     </van-swipe>
   </div>
 </template>
 
 <script>
-import axios from "axios";
+// import axios from "axios";
 import { onMounted, reactive } from "vue";
+import {getBanner} from '../request/api/home'; 
+// import { ref } from 'vue';
 
 export default {
   name: "SwiperBar",
@@ -19,13 +21,18 @@ export default {
       images: ['xxx', 'xxxx'],
     });
 
-    onMounted(() => {
-      axios
-        .get("https://netease-cloud-music-api-murex-seven-11.vercel.app/banner")
-        .then((res) => {
-          console.log(res);
-          state.images = res.data.banners;
-        });
+    onMounted( async () => {
+      let res = await getBanner();
+      console.log(res)
+      state.images = res.data.banners;
+      // axios
+      //   .get("https://netease-cloud-music-api-murex-seven-11.vercel.app/banner")
+      //   .then((res) => {
+      //     console.log(res);
+      //     state.images = res.data.banners;
+      //   });
+
+
     });
     return { state };
   },
@@ -34,7 +41,9 @@ export default {
 
 <style lang="less" scoped>
 #swiperbar {
+  margin: .2rem .2rem;
   .van-swipe {
+    
     width: 100%;
     height: 3rem;
     .van-swipe-item {
