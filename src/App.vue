@@ -1,18 +1,16 @@
 <template>
   <div class="app">
-      <TopBar/>
-      <SwiperBar/>
+     <HomeView/>
   </div>
 </template>
 
 <script>
-import TopBar from './components/TopBar.vue';
-import SwiperBar from './components/SwiperBar.vue'
+import HomeView from './views/HomeView.vue';
+
 export default {
   name: 'App',
   components: {
-    TopBar,
-    SwiperBar
+    HomeView
   }
 }
 </script>

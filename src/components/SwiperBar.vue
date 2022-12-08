@@ -23,7 +23,7 @@ export default {
 
     onMounted( async () => {
       let res = await getBanner();
-      console.log(res)
+      // console.log(res)
       state.images = res.data.banners;
       // axios
       //   .get("https://netease-cloud-music-api-murex-seven-11.vercel.app/banner")
