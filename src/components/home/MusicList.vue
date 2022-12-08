@@ -12,14 +12,16 @@
         class="my-swipe"
       >
         <van-swipe-item v-for="item in state.items" :key="item">
-          <img :src="item.picUrl" />
-          <span class="playcount">
-            <svg class="icon" aria-hidden="true">
-              <use xlink:href="#icon-songlist-01"></use>
-            </svg>
-            {{ changeCount(item.playCount) }}
-          </span>
-          <span class="name">{{ item.name }}</span>
+          <router-link :to="{path: '/itemMusic', query: {id: item.id}}">
+            <img :src="item.picUrl" />
+            <span class="playcount">
+              <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-songlist-01"></use>
+              </svg>
+              {{ changeCount(item.playCount) }}
+            </span>
+            <span class="name">{{ item.name }}</span>
+          </router-link>
         </van-swipe-item>
       </van-swipe>
     </div>
@@ -81,27 +83,29 @@ function changeCount(num) {
       .van-swipe-item {
         display: flex;
         flex-direction: column;
-        margin-left: .2rem;
-        margin-right: .2rem;
+        margin-left: 0.2rem;
+        margin-right: 0.2rem;
+        a{
+          color: black;
+        }
+        
         img {
           height: 100%;
           width: 150px;
           max-height: 3rem;
           object-fit: cover;
-          border-radius: .2rem;
+          border-radius: 0.2rem;
         }
         .playcount {
           position: absolute;
           color: white;
           right: 10px;
-          top: .1rem;
+          top: 0.1rem;
           .icon {
-            width: .4rem;
-           
+            width: 0.4rem;
           }
         }
         .name {
-          
         }
       }
     }
