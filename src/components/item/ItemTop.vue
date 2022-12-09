@@ -34,28 +34,28 @@
     <div class="bottom">
       <div class="item">
         <svg class="icon" aria-hidden="true">
-          <use xlink:href="#icon-unorderedlist"></use>
+          <use xlink:href="#icon-pinglun"></use>
         </svg>
         <span>{{ playList.trackCount }}</span>
       </div>
 
       <div class="item">
         <svg class="icon" aria-hidden="true">
-          <use xlink:href="#icon-unorderedlist"></use>
+          <use xlink:href="#icon-fenxiang"></use>
         </svg>
         <span>{{ playList.shareCount }}</span>
       </div>
 
       <div class="item">
         <svg class="icon" aria-hidden="true">
-          <use xlink:href="#icon-unorderedlist"></use>
+          <use xlink:href="#icon-yunxiazai"></use>
         </svg>
         <span>100</span>
       </div>
 
       <div class="item">
         <svg class="icon" aria-hidden="true">
-          <use xlink:href="#icon-unorderedlist"></use>
+          <use xlink:href="#icon-xuanze-duoxuan"></use>
         </svg>
         <span>100</span>
       </div>
@@ -176,6 +176,7 @@ console.log("ItemTop get value");
       flex-direction: column;
       align-items: center;
       color: white;
+      fill: white;
     }
   }
 

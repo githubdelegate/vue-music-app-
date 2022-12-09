@@ -93,7 +93,7 @@ export default {
         white-space: nowrap;
         flex-shrink: 5;
         .name {
-        //   width: 80%;
+          width: 5rem;
           font-weight: bold;
           text-overflow: ellipsis;
           overflow: hidden;
