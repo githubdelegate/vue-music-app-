@@ -27,6 +27,10 @@ onMounted(async () => {
      let res = await getPlayListDetail(id);
      console.log(res);
      state.playList = res.data.playlist
+
+     // 缓存数据 sessionStorge
+     sessionStorage.setItem()
+
 })
 
 </script>
