@@ -11,10 +11,11 @@ import ItemTopVue from '@/components/item/ItemTop.vue';
 import { reactive } from 'vue';
 
 // 当引入模块只有一个 export 的时候， 要么使用大括号 要么 加上default ,不然报错找不到
-import { getPlayListDetail } from '@/request/api/itemMusic'
+import { getPlayListDetail, getMusicList } from '@/request/api/itemMusic'
 
 const state = reactive({
-    playList: {}
+    playList: {},
+    musicList: {}
 })
 
 onMounted(async () => {
@@ -25,11 +26,15 @@ onMounted(async () => {
      }
 
      let res = await getPlayListDetail(id);
-     console.log(res);
+     console.log('playlist = ' + res);
      state.playList = res.data.playlist
-
      // 缓存数据 sessionStorge
-     sessionStorage.setItem()
+     sessionStorage.setItem('itemDetail', JSON.stringify(res.data.playlist))
+
+     let musiclist = await getMusicList(id)
+     console.log('musiclist')
+     console.log(musiclist)
+
 
 })
 

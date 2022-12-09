@@ -1,7 +1,6 @@
 <template>
   <div class="itemTop">
     <!-- {{ playList }} -->
-
     <img class="botimg" :src="playList.coverImgUrl" alt="" />
 
     <div class="top">
@@ -26,8 +25,8 @@
       <div class="right">
         <span class="title">{{ playList.name }}</span>
         <div class="avatar">
-          <img :src="playList.creator.avatarUrl" alt="" />
-          <span>{{ playList.creator.nickname }}</span>
+          <img :src="creater.avatarUrl" alt="" />
+          <span>{{ creater.nickname }}</span>
         </div>
         <span class="desc">{{ playList.description }}</span>
       </div>
@@ -67,8 +66,26 @@
 <script>
 export default {
   props: ["playList"],
+
   setup(props) {
+    console.log("setup props");
     console.log(props.playList);
+  },
+  computed: {
+    creater: function () {
+      var creater = JSON.parse(sessionStorage.getItem("itemDetail")).creator;
+      console.log("creater11");
+      console.log(creater);
+      if ((this.playList.creator==undefined)) {
+        console.log("没有头像数据");
+      } else {
+        console.log("有头像数据");
+        creater = this.playList.creator
+      }
+      console.log("creater");
+      console.log(creater);
+      return creater;
+    },
   },
 };
 console.log("ItemTop get value");
@@ -123,16 +140,16 @@ console.log("ItemTop get value");
     }
 
     .right {
-     width: 5rem;
-     height: 100px;
+      width: 5rem;
+      height: 100px;
       margin-left: 0.2rem;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       margin-right: 10px;
       img {
-        max-width: 0.8rem;
-        max-height: 0.8rem;
+        max-width: 0.5rem;
+        max-height: 0.5rem;
         object-fit: cover;
         border-radius: 0.4rem;
       }
