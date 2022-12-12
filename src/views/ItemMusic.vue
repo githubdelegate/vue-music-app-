@@ -39,7 +39,6 @@ onMounted(async () => {
      console.log(musiclist)
      state.songs = musiclist.data.songs
 })
-
 </script>
 
 <style lang="less" scoped>
