@@ -8,7 +8,8 @@
     </div>
     <div class="right">
       <svg
-        class="icon" v-if="!isPlaying"
+        class="icon"
+        v-if="!isPlaying"
         aria-hidden="true"
         @click="playmusic(playList[playListIndex].id)"
       >
@@ -16,13 +17,14 @@
       </svg>
 
       <svg
-        class="icon" v-if="isPlaying"
+        class="icon"
+        v-if="isPlaying"
         aria-hidden="true"
         @click="playmusic(playList[playListIndex].id)"
       >
         <use xlink:href="#icon-zanting"></use>
       </svg>
-      <svg class="icon" aria-hidden="true">
+      <svg class="icon" aria-hidden="true" @click="togglePlayList">
         <use xlink:href="#icon-unorderedlist"></use>
       </svg>
     </div>
@@ -31,15 +33,24 @@
       :src="`https://music.163.com/song/media/outer/url?id=${playList[playListIndex].id}.mp3`"
       type="audio/mpeg"
     ></audio>
+    <van-popup v-model:show="showPlayList" round  position="bottom" :style="{ height: '80%' ,width: '100%' }">
+      <PlayListVue />
+    </van-popup>
   </div>
 </template>
 <script>
 import { mapMutations, mapState } from "vuex";
-
+import PlayListVue from "./PlayList.vue";
 export default {
+
+  components:{
+    PlayListVue
+  },
+
   data() {
     return {
       playMusicUrl: "",
+      showPlayList: false
     };
   },
 
@@ -51,8 +62,8 @@ export default {
     playListIndex(old, newv) {
       console.log(old);
       console.log(newv);
-      this.$refs.audio.autoplay = true
-      this.updatePlay({"isPlaying": true });
+      this.$refs.audio.autoplay = true;
+      this.updatePlay({ isPlaying: true });
     },
   },
 
@@ -66,12 +77,17 @@ export default {
       console.log("返回音乐");
       if (this.$refs.audio.paused) {
         this.$refs.audio.play();
-        this.updatePlay({"isPlaying": true });
+        this.updatePlay({ isPlaying: true });
       } else {
         this.$refs.audio.pause();
-        this.updatePlay({ "isPlaying": false });
+        this.updatePlay({ isPlaying: false });
       }
     },
+
+    togglePlayList() {
+      this.showPlayList = !this.showPlayList
+    },
+
     ...mapMutations(["updatePlay"]),
   },
 };
