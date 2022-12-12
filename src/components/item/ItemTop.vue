@@ -71,8 +71,15 @@ export default {
     console.log("setup props");
     console.log(props.playList);
   },
+
   computed: {
     creater: function () {
+      if (sessionStorage.getItem("itemDetail") == null) {
+          return {
+            "avatarUrl": "",
+            "nickname": "nickname"
+          }
+      }
       var creater = JSON.parse(sessionStorage.getItem("itemDetail")).creator;
       console.log("creater11");
       console.log(creater);

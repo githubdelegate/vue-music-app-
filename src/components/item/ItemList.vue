@@ -10,7 +10,7 @@
       <button>+ 收藏({{ subscribedCount }})</button>
     </div>
     <div class="list">
-      <div class="song" v-for="(song, index) in songs" :key="index">
+      <div class="song" v-for="(song, index) in songs" :key="index" @click="playMusic(index)">
       <div class="subleft">
         <span class="left">{{ index + 1 }}</span>
         <div class="center">
@@ -30,12 +30,26 @@
   </div>
 </template>
 <script>
+import { mapMutations } from 'vuex';
 export default {
   props: ["songs", "subscribedCount"],
   setup(props) {
     console.log("setup props");
     console.log(props.songs);
   },
+
+  methods: {
+    playMusic(i) {
+      this.upatePlayList({
+        playList: this.songs
+      })
+      this.updatePlayIndex({
+        playListIndex: i
+      })
+    },
+    ...mapMutations(['upatePlayList','updatePlayIndex']),
+  }
+
 };
 </script>
 
