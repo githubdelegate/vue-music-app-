@@ -3,13 +3,12 @@
     <div class="left">
       <img :src="playList[playListIndex].al.picUrl" alt="" />
       <div>
-        <p>{{ playList[playListIndex].al.name }}</p>
+        <p>{{ playList[playListIndex].name }}</p>
       </div>
     </div>
     <div class="right">
       <svg
-        class="icon"
-        v-if="!isPlaying"
+        class="icon" v-if="!isPlaying"
         aria-hidden="true"
         @click="playmusic(playList[playListIndex].id)"
       >
@@ -17,8 +16,7 @@
       </svg>
 
       <svg
-        class="icon"
-        v-if="isPlaying"
+        class="icon" v-if="isPlaying"
         aria-hidden="true"
         @click="playmusic(playList[playListIndex].id)"
       >
@@ -49,6 +47,15 @@ export default {
     ...mapState(["playListIndex", "playList", "isPlaying"]),
   },
 
+  watch: {
+    playListIndex(old, newv) {
+      console.log(old);
+      console.log(newv);
+      this.$refs.audio.autoplay = true
+      this.updatePlay({"isPlaying": true });
+    },
+  },
+
   onMounted() {
     console.log("footer music refs");
     console.log(this.$refs.audio);
@@ -59,10 +66,10 @@ export default {
       console.log("返回音乐");
       if (this.$refs.audio.paused) {
         this.$refs.audio.play();
-        this.updatePlay({ isPlaying: true });
+        this.updatePlay({"isPlaying": true });
       } else {
         this.$refs.audio.pause();
-        this.updatePlay({ isPlaying: false });
+        this.updatePlay({ "isPlaying": false });
       }
     },
     ...mapMutations(["updatePlay"]),

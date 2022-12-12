@@ -19,6 +19,7 @@ const store = createStore({
     mutations: {
         upatePlayList(state, payload) {
             state.playList = payload.playList
+            state.isPlaying = false
         },
 
         updatePlayIndex(state, payload) {
