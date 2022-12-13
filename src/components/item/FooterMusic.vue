@@ -1,6 +1,6 @@
 <template>
   <div class="footer">
-    <div class="left">
+    <div class="left" @click="gotoMusicDetail">
       <img :src="playList[playListIndex].al.picUrl" alt="" />
       <div>
         <p>{{ playList[playListIndex].name }}</p>
@@ -36,21 +36,28 @@
     <van-popup v-model:show="showPlayList" round  position="bottom" :style="{ height: '80%' ,width: '100%' }">
       <PlayListVue />
     </van-popup>
+
+    <van-popup v-model:show="showMusicDetail"  position="right" :style="{ height: '100%' ,width: '100%' }">
+      <MusicDetailVue :musicInfo="playList[playListIndex]" />
+    </van-popup>
   </div>
 </template>
 <script>
 import { mapMutations, mapState } from "vuex";
 import PlayListVue from "./PlayList.vue";
+import MusicDetailVue from "./MusicDetail.vue";
 export default {
 
   components:{
-    PlayListVue
+    PlayListVue,
+    MusicDetailVue
   },
 
   data() {
     return {
       playMusicUrl: "",
-      showPlayList: false
+      showPlayList: false,
+      showMusicDetail: false,
     };
   },
 
@@ -88,6 +95,9 @@ export default {
       this.showPlayList = !this.showPlayList
     },
 
+    gotoMusicDetail() {
+       this.showMusicDetail = !this.showMusicDetail
+    },
     ...mapMutations(["updatePlay"]),
   },
 };
