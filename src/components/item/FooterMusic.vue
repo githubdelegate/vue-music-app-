@@ -1,6 +1,6 @@
 <template>
   <div class="footer">
-    <div class="left" @click="gotoMusicDetail">
+    <div class="left" @click="this.togglemMsicDetailShow()">
       <img :src="playList[playListIndex].al.picUrl" alt="" />
       <div>
         <p>{{ playList[playListIndex].name }}</p>
@@ -37,8 +37,8 @@
       <PlayListVue />
     </van-popup>
 
-    <van-popup v-model:show="showMusicDetail"  position="right" :style="{ height: '100%' ,width: '100%' }">
-      <MusicDetailVue :musicInfo="playList[playListIndex]" />
+    <van-popup v-model:show="this.musicDetailShow"  position="right" :style="{ height: '100%' ,width: '100%' }">
+      <MusicDetailVue :musicInfo="playList[playListIndex]" @playMusic="playmusic" :isPlaying="this.isPlaying" />
     </van-popup>
   </div>
 </template>
@@ -48,6 +48,15 @@ import PlayListVue from "./PlayList.vue";
 import MusicDetailVue from "./MusicDetail.vue";
 export default {
 
+  setup() {
+      const emitTest = () => {
+        console.log('emit test');
+      }
+
+      return {
+        emitTest
+      }
+  },
   components:{
     PlayListVue,
     MusicDetailVue
@@ -62,7 +71,7 @@ export default {
   },
 
   computed: {
-    ...mapState(["playListIndex", "playList", "isPlaying"]),
+    ...mapState(["playListIndex", "playList", "isPlaying", "musicDetailShow"]),
   },
 
   watch: {
@@ -94,11 +103,7 @@ export default {
     togglePlayList() {
       this.showPlayList = !this.showPlayList
     },
-
-    gotoMusicDetail() {
-       this.showMusicDetail = !this.showMusicDetail
-    },
-    ...mapMutations(["updatePlay"]),
+    ...mapMutations(["updatePlay", "togglemMsicDetailShow"]),
   },
 };
 </script>

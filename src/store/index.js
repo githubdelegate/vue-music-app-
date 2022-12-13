@@ -13,6 +13,7 @@ const store = createStore({
             }],
             playListIndex: 0,
             isPlaying: false,
+            musicDetailShow: false,
         }
     },
 
@@ -28,6 +29,10 @@ const store = createStore({
 
         updatePlay(state, payload) {
             state.isPlaying = payload.isPlaying
+        },
+
+        togglemMsicDetailShow(state) {
+            state.musicDetailShow = !state.musicDetailShow
         }
     }
 })
