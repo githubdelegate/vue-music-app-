@@ -1,6 +1,6 @@
 
-import { Swipe, SwipeItem } from 'vant';
-const plugins = [Swipe, SwipeItem]
+import { Swipe, SwipeItem,Popup } from 'vant';
+const plugins = [Swipe, SwipeItem,Popup]
 
 export default function useplugins(app) {
     plugins.forEach(function (value) {

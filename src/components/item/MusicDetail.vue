@@ -18,9 +18,9 @@
       </svg>
     </div>
     <div class="content">
-      <img src="@/assets/needle-ab.png" alt="" class="needle" />
+      <img src="@/assets/needle-ab.png" alt="" class="needle" :class="{needle_active:isPlaying, needle_stop: !isPlaying}" />
       <img src="@/assets/music-circle.png" alt="" class="circle" />
-      <img :src="musicInfo.al.picUrl" alt="" class="pic" />
+      <img :src="musicInfo.al.picUrl" alt="" class="pic" :class="{pic_pause: !isPlaying ,pic_active: isPlaying}"  />
     </div>
 
     <div class="bottom">
@@ -158,6 +158,15 @@ export default {
       transition: all 2s;
     }
 
+    .needle_active {
+      transform: rotate(0deg);
+    }
+
+    .needle_stop {
+      transform: rotate(-10deg);
+    }
+
+
     .circle {
       width: 5rem;
       height: 5rem;
@@ -172,6 +181,15 @@ export default {
       border-radius: 50%;
       position: absolute;
       bottom: 3.14rem;
+      animation: rotate_ar 10s linear infinite;
+    }
+
+    .pic_active {
+      animation-play-state: running;
+    }
+
+    .pic_pause {
+      animation-play-state: paused;
     }
   }
   .bottom {
@@ -196,6 +214,15 @@ export default {
         width: 1.8rem;
         height: 1.8rem;
       }
+    }
+  }
+
+  @keyframes rotate_ar {
+    0% {
+      transform: rotateZ(0deg);
+    }
+    100% {
+      transform: rotateZ(360deg);
     }
   }
 }
